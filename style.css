@@ -1,0 +1,37 @@
+/* Reset some default browser spacing */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Header styling */
+header {
+  background-color: #000;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Main content */
+main {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Section spacing */
+section {
+  margin-bottom: 40px;
+}
+
+/* Footer */
+footer {
+  background-color: #eee;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
