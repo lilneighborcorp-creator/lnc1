@@ -79,9 +79,26 @@ nav a:hover{
   min-height:calc(100vh - 72px);
 }
 
+/* Green rails with diagonal repeating coin overlay */
 .left-rail,
 .right-rail{
-  background:var(--green);
+  background-color: var(--green);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Coin pattern layer */
+.left-rail::before,
+.right-rail::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background-image: url("images/new-lnc-coin.png");
+  background-repeat: repeat;
+  background-size: 80px 80px;   /* coin size */
+  transform: rotate(-25deg);    /* diagonal angle */
+  opacity: 0.25;                /* coin visibility */
+  pointer-events:none;
 }
 
 .center{
@@ -165,6 +182,14 @@ audio{
   .layout{
     grid-template-columns: 16px minmax(0, 900px) 16px;
   }
+
+  /* Optional: hide pattern on mobile (uncomment if you want it cleaner) */
+  /*
+  .left-rail::before,
+  .right-rail::before{
+    display:none;
+  }
+  */
 
   .beat-row{
     flex-direction:column;
