@@ -37,9 +37,10 @@ header{
 }
 
 .brand img{
-  height:24px;        /* change to 56px or 64px if you want it bigger */
+  height:32px !important;
   width:auto;
-  display:block;
+}
+
 }
 
 /* Navigation */
