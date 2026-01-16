@@ -26,24 +26,37 @@ header{
   justify-content:space-between;
 }
 
-/* Logo + brand */
+/* Logo + brand container */
 .brand{
   display:flex;
   align-items:center;
+}
+
+/* Clickable logo + text */
+.brand-link{
+  display:flex;
+  align-items:center;
   gap:12px;
-  font-weight:900;
-  font-size:22px;
-  letter-spacing:.5px;
+  text-decoration:none;
 }
 
+/* Logo image */
 .brand img{
-  height:40px;
+  height:40px;   /* adjust: 32–48px sweet spot */
   width:auto;
+  display:block;
 }
 
+/* Brand text */
+.brand-text{
+  color:var(--white);
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:.4px;
+  white-space:nowrap;
 }
 
-/* Navigation */
+/* ================= NAVIGATION ================= */
 nav{
   display:flex;
   gap:16px;
