@@ -6,7 +6,9 @@
   --white:#ffffff;
 }
 
-*{ box-sizing:border-box; }
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -15,7 +17,7 @@ body{
   color: var(--white);
 }
 
-/* Header */
+/* ================= HEADER ================= */
 header{
   background: var(--red);
   padding:16px 24px;
@@ -24,12 +26,23 @@ header{
   justify-content:space-between;
 }
 
+/* Logo + brand */
 .brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
   font-weight:900;
   font-size:22px;
   letter-spacing:.5px;
 }
 
+.brand img{
+  height:48px;        /* change to 56px or 64px if you want it bigger */
+  width:auto;
+  display:block;
+}
+
+/* Navigation */
 nav{
   display:flex;
   gap:16px;
@@ -48,14 +61,15 @@ nav a:hover{
   background:rgba(0,0,0,.25);
 }
 
-/* Green rails + blue center column */
+/* ================= LAYOUT ================= */
 .layout{
   display:grid;
   grid-template-columns: 1fr minmax(0, 900px) 1fr;
   min-height:calc(100vh - 72px);
 }
 
-.left-rail, .right-rail{
+.left-rail,
+.right-rail{
   background:var(--green);
 }
 
@@ -64,7 +78,7 @@ nav a:hover{
   padding:32px;
 }
 
-/* Beat cards */
+/* ================= BEATS ================= */
 .beat{
   background:rgba(0,0,0,.45);
   border-radius:16px;
@@ -105,7 +119,7 @@ audio{
   color:var(--white);
 }
 
-/* Cover art layout */
+/* ================= COVER ART ================= */
 .beat-row{
   display:flex;
   gap:16px;
@@ -125,19 +139,22 @@ audio{
   flex:1;
 }
 
-/* Mobile-friendly */
+/* ================= MOBILE ================= */
 @media (max-width:600px){
   header{
     flex-direction:column;
     align-items:flex-start;
     gap:10px;
   }
+
   .layout{
-    grid-template-columns: 16px minmax(0, 900px) 16px; /* smaller rails on mobile */
+    grid-template-columns: 16px minmax(0, 900px) 16px;
   }
+
   .beat-row{
     flex-direction:column;
   }
+
   .cover{
     width:100%;
     height:auto;
