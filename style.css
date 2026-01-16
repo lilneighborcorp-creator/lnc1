@@ -1,37 +1,146 @@
-/* Reset some default browser spacing */
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f7f7f7;
-  color: #222;
-  line-height: 1.6;
+:root{
+  --red:#ff0000;
+  --green:#00ff00;
+  --blue:#0000ff;
+  --black:#000000;
+  --white:#ffffff;
 }
 
-/* Header styling */
-header {
-  background-color: #000;
-  color: #fff;
-  padding: 40px 20px;
-  text-align: center;
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--black);
+  color: var(--white);
 }
 
-/* Main content */
-main {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
+/* Header */
+header{
+  background: var(--red);
+  padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-/* Section spacing */
-section {
-  margin-bottom: 40px;
+.brand{
+  font-weight:900;
+  font-size:22px;
+  letter-spacing:.5px;
 }
 
-/* Footer */
-footer {
-  background-color: #eee;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #555;
+nav{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+nav a{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:700;
+  padding:8px 10px;
+  border-radius:6px;
+}
+
+nav a:hover{
+  background:rgba(0,0,0,.25);
+}
+
+/* Green rails + blue center column */
+.layout{
+  display:grid;
+  grid-template-columns: 1fr minmax(0, 900px) 1fr;
+  min-height:calc(100vh - 72px);
+}
+
+.left-rail, .right-rail{
+  background:var(--green);
+}
+
+.center{
+  background:var(--blue);
+  padding:32px;
+}
+
+/* Beat cards */
+.beat{
+  background:rgba(0,0,0,.45);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.meta{
+  font-size:14px;
+  opacity:.85;
+  margin-bottom:10px;
+}
+
+audio{
+  width:100%;
+  margin-bottom:10px;
+}
+
+/* Buttons */
+.btn{
+  display:block;
+  width:100%;
+  text-align:center;
+  padding:12px;
+  border-radius:12px;
+  font-weight:800;
+  text-decoration:none;
+  margin-top:8px;
+}
+
+.btn.free{
+  background:var(--green);
+  color:var(--black);
+}
+
+.btn.stems{
+  background:var(--red);
+  color:var(--white);
+}
+
+/* Cover art layout */
+.beat-row{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+}
+
+.cover{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:12px;
+  flex-shrink:0;
+  background:#000;
+}
+
+.beat-info{
+  flex:1;
+}
+
+/* Mobile-friendly */
+@media (max-width:600px){
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .layout{
+    grid-template-columns: 16px minmax(0, 900px) 16px; /* smaller rails on mobile */
+  }
+  .beat-row{
+    flex-direction:column;
+  }
+  .cover{
+    width:100%;
+    height:auto;
+    max-width:280px;
+  }
 }
