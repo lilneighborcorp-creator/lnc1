@@ -1,349 +1,244 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lil' Neighbor C. LLC</title>
+
   <style>
     :root{
-      --red:#ef4444;
-      --green:#22c55e;
-      --blue:#3b82f6;
-      --bg:#0b1020;
-      --card:#121a33;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --border:rgba(255,255,255,.10);
-      --glass:rgba(255,255,255,.04);
+      --red:#ff0000;
+      --green:#00ff00;
+      --blue:#0000ff;
+      --black:#000000;
+      --white:#ffffff;
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(900px 500px at 20% 0%, rgba(59,130,246,.22), transparent 60%),
-                  radial-gradient(900px 500px at 80% 0%, rgba(34,197,94,.18), transparent 60%),
-                  radial-gradient(900px 500px at 50% 100%, rgba(239,68,68,.18), transparent 60%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.45;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--black);
+      color: var(--white);
     }
-    a{color:inherit}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* ================= HEADER ================= */
     header{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
-    }
-    .brand{display:flex;gap:12px;align-items:center;min-width:240px}
-    .logo{
-      width:40px;height:40px;border-radius:12px;
-      background: conic-gradient(from 180deg, var(--red), var(--green), var(--blue), var(--red));
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      flex:0 0 auto;
-    }
-
-    /* NAV */
-    nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-    .navlink{
-      padding:10px 12px;
-      border-radius:12px;
-      text-decoration:none;
-      border:1px solid transparent;
-      opacity:.92;
-    }
-    .navlink:hover{opacity:1;border-color:var(--border);background:var(--glass)}
-    .dropdown{position:relative}
-    .dropbtn{
-      cursor:pointer;
-      display:inline-flex;
+      background: var(--red);
+      padding:16px 24px;
+      display:flex;
       align-items:center;
-      gap:8px;
-      user-select:none;
+      justify-content:space-between;
     }
-    .menu{
-      position:absolute;
-      right:0;
-      top:46px;
-      width:220px;
-      background: rgba(18,26,51,.95);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:8px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.45);
-      display:none;
-      z-index:50;
-    }
-    .menu a{
-      display:block;
-      padding:10px 10px;
-      border-radius:12px;
-      text-decoration:none;
-      color:var(--text);
-      opacity:.95;
-    }
-    .menu a:hover{background:rgba(255,255,255,.06);opacity:1}
-    .dropdown.open .menu{display:block}
 
+    .brand{
+      font-weight:900;
+      font-size:22px;
+      letter-spacing:.5px;
+    }
+
+    nav{
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+
+    nav a{
+      color:var(--white);
+      text-decoration:none;
+      font-weight:700;
+      padding:8px 10px;
+      border-radius:6px;
+    }
+
+    nav a:hover{
+      background:rgba(0,0,0,.25);
+    }
+
+    /* ================= COLOR LAYOUT ================= */
+    .layout{
+      display:grid;
+      grid-template-columns: 1fr minmax(0, 900px) 1fr;
+      min-height:calc(100vh - 72px);
+    }
+
+    .left-rail{
+      background:var(--green);
+    }
+
+    .right-rail{
+      background:var(--green);
+    }
+
+    .center{
+      background:var(--blue);
+      padding:32px;
+    }
+
+    /* ================= CONTENT ================= */
     .hero{
-      margin-top:18px;
-      background: linear-gradient(135deg, rgba(239,68,68,.12), rgba(34,197,94,.10), rgba(59,130,246,.12));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:22px;
-      padding:34px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      background:rgba(0,0,0,.35);
+      border-radius:18px;
+      padding:28px;
+      margin-bottom:24px;
     }
-    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 18px}
-    .pill{
-      padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      font-size:14px;color:var(--muted);
+
+    h1{
+      margin:0 0 10px;
+      font-size:42px;
     }
-    h1{margin:0;font-size:42px;letter-spacing:-.02em}
-    .lead{max-width:70ch;color:#cbd5e1;margin-top:10px}
+
+    .lead{
+      font-size:18px;
+      line-height:1.5;
+      max-width:60ch;
+    }
+
+    .beats{
+      display:grid;
+      gap:16px;
+      margin-top:24px;
+    }
+
+    .beat{
+      background:rgba(0,0,0,.45);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .beat h3{
+      margin:0 0 6px;
+    }
+
+    .meta{
+      font-size:14px;
+      opacity:.85;
+      margin-bottom:10px;
+    }
+
+    audio{
+      width:100%;
+      margin-bottom:10px;
+    }
 
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 16px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      text-decoration:none;
-      cursor:pointer;
-      font-weight:600;
-    }
-    .btn:hover{background:rgba(255,255,255,.09)}
-    .btn.primary{
-      background: linear-gradient(90deg, var(--red), var(--green), var(--blue));
-      color:#0b1020;font-weight:800;border:none;
-    }
-    .btn.block{width:100%}
-    .btn.small{padding:10px 12px;border-radius:12px;font-size:14px}
-
-    .grid{display:grid;gap:16px;margin-top:18px}
-    @media(min-width:900px){ .grid{grid-template-columns:1.2fr .8fr} }
-    .card{
-      background: rgba(18,26,51,.72);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:18px;
-    }
-    .beats{display:grid;gap:12px}
-    .beat{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.03);
-    }
-    .beat h3{margin:0 0 6px}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
-    audio{width:100%}
-    .stack{display:grid;gap:10px;margin-top:10px}
-    footer{opacity:.75;font-size:14px;margin:28px 0 8px}
-
-    input, textarea{
+      display:block;
       width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      outline:none;
+      text-align:center;
+      padding:12px;
+      border-radius:12px;
+      font-weight:800;
+      text-decoration:none;
+      margin-top:8px;
     }
-    textarea{min-height:120px;resize:vertical}
-    .row{display:grid;gap:12px}
-    @media(min-width:700px){ .row{grid-template-columns:1fr 1fr} }
 
-    .serviceBadge{
-      display:inline-block;
-      padding:6px 10px;border-radius:999px;
-      font-size:12px;font-weight:800;color:#0b1020;
-      background: var(--blue);
+    .btn.free{
+      background:var(--green);
+      color:var(--black);
+    }
+
+    .btn.stems{
+      background:var(--red);
+      color:var(--white);
+    }
+
+    /* ================= FOOTER ================= */
+    footer{
+      text-align:center;
+      padding:24px;
+      font-size:14px;
+      opacity:.85;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <div style="font-weight:900">Lil' Neighbor C. LLC</div>
-          <div style="font-size:13px;color:#9ca3af">Free-for-profit beats + stem packs</div>
-        </div>
-      </div>
 
-      <nav>
-        <div class="dropdown" id="merchDropdown">
-          <a class="navlink dropbtn" href="merch/lnc-merch.html" aria-haspopup="true" aria-expanded="false">
-            Merch ▾
-          </a>
-          <div class="menu" role="menu" aria-label="Merch menu">
-            <a href="merch/lnc-merch.html">LNC Merch</a>
-            <a href="merch/lnc-workgear.html">LNC Workgear</a>
-            <a href="merch/lnc-yorkshire.html">LNC Yorkshire</a>
-          </div>
-        </div>
-        <a class="navlink" href="photography.html">Photography</a>
-        <a class="navlink" href="about.html">About Us</a>
-        <a class="navlink" href="#contact">Contact</a>
-      </nav>
-    </header>
+  <!-- HEADER -->
+  <header>
+    <div class="brand">Lil' Neighbor C. LLC</div>
+    <nav>
+      <a href="merch/lnc-merch.html">Merch</a>
+      <a href="photography.html">Photography</a>
+      <a href="about.html">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <section class="hero">
-      <div class="pillrow">
-        <span class="pill">Free for profit (license on page)</span>
-        <span class="pill">Instant downloads</span>
-        <span class="pill">Stems available</span>
-      </div>
+  <!-- COLOR LAYOUT -->
+  <div class="layout">
+    <div class="left-rail"></div>
 
-      <h1>Beats you can actually use.</h1>
-      <p class="lead">
-        <span class="serviceBadge">Public Service:</span>
-        I’m currently offering <strong>free-for-profit beats</strong> with optional <strong>stem packs</strong>.
-        Listen below, download the free beat, or grab stems for full control.
-      </p>
-
-      <div class="grid">
-        <!-- BEATS LIST -->
-        <div class="card">
-          <h2 style="margin:0 0 10px">Free Beats</h2>
-          <p style="margin-top:0;color:#cbd5e1">
-            Each beat has a preview player, a free download, and a stems purchase link.
-          </p>
-
-          <div class="beats">
-            <!-- Beat 1 -->
-            <div class="beat">
-              <h3>Beat 001 — “Midnight Walk”</h3>
-              <div class="meta">BPM: 140 • Key: Am • Tag: dark / bounce</div>
-
-              <audio controls preload="metadata">
-                <source src="audio/beat1-preview.mp3" type="audio/mpeg">
-                Your browser does not support audio playback.
-              </audio>
-
-              <div class="stack">
-                <a class="btn primary block" href="audio/beat1-free.wav" download>
-                  Download Free Beat (WAV)
-                </a>
-
-                <a class="btn block" href="stems.html#beat001">
-                  Buy/Download Stems
-                </a>
-              </div>
-            </div>
-
-            <!-- Beat 2 -->
-            <div class="beat">
-              <h3>Beat 002 — “Green Light”</h3>
-              <div class="meta">BPM: 155 • Key: C#m • Tag: upbeat / energy</div>
-
-              <audio controls preload="metadata">
-                <source src="audio/beat2-preview.mp3" type="audio/mpeg">
-                Your browser does not support audio playback.
-              </audio>
-
-              <div class="stack">
-                <a class="btn primary block" href="audio/beat2-free.wav" download>
-                  Download Free Beat (WAV)
-                </a>
-
-                <a class="btn block" href="stems.html#beat002">
-                  Buy/Download Stems
-                </a>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="card" style="margin-top:12px">
-            <h3 style="margin:0 0 8px">Quick license note</h3>
-            <div style="color:#cbd5e1">
-              Free beats are allowed for profit (streaming, videos, etc.). Stems are sold separately.
-              (You can customize this wording later to match your exact terms.)
-            </div>
-          </div>
-        </div>
-
-        <!-- SIDE CARD (optional info) -->
-        <div class="card">
-          <h2 style="margin:0 0 10px">How stems work</h2>
-          <ul style="margin:0;padding-left:18px;color:#cbd5e1">
-            <li>Stems = individual track files (drums, bass, melody, etc.)</li>
-            <li>Better mixing, easier customization</li>
-            <li>Usually delivered as a ZIP after purchase</li>
-          </ul>
-          <p style="color:#9ca3af;margin-top:12px">
-            You can link the stems button to Gumroad/Payhip/Stripe Checkout later.
-          </p>
-          <a class="btn small" href="stems.html">Go to Stems Page</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="card" id="contact" style="margin-top:18px">
-      <h2 style="margin:0 0 10px">Contact</h2>
-      <p style="margin-top:0;color:#cbd5e1">Send a message and I’ll get back to you.</p>
-
-      <!-- IMPORTANT: This needs a form handler service (see instructions below) -->
-      <form id="contactForm" method="POST" action="PASTE_YOUR_FORM_ENDPOINT_HERE">
-        <div class="row">
-          <div>
-            <label>Name</label>
-            <input name="name" placeholder="Your name" required />
-          </div>
-          <div>
-            <label>Email</label>
-            <input name="email" type="email" placeholder="you@example.com" required />
-          </div>
-        </div>
-
-        <div style="margin-top:12px">
-          <label>Message</label>
-          <textarea name="message" placeholder="What do you need?" required></textarea>
-        </div>
-
-        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn primary" type="submit">Send message</button>
-          <a class="btn" href="mailto:lilneighborcorp@gmail.com">Email me directly</a>
-        </div>
-
-        <p style="color:#9ca3af;margin:12px 0 0">
-          Tip: You can also just email <strong>lilneighborcorp@gmail.com</strong>.
+    <main class="center">
+      <section class="hero">
+        <h1>Free-for-Profit Beats</h1>
+        <p class="lead">
+          Download beats for free and use them commercially.
+          Purchase stem packs if you want full control.
         </p>
-      </form>
-    </section>
+      </section>
 
-    <footer>
-      © <span id="year"></span> Lil' Neighbor C. LLC
-    </footer>
+      <section class="beats">
+        <!-- BEAT 1 -->
+        <div class="beat">
+          <h3>Beat 001 – Midnight Walk</h3>
+          <div class="meta">140 BPM · A minor</div>
+
+          <audio controls>
+            <source src="audio/beat1-preview.mp3" type="audio/mpeg">
+          </audio>
+
+          <a class="btn free" href="audio/beat1-free.wav" download>
+            Download Free Beat (WAV)
+          </a>
+
+          <a class="btn stems" href="stems.html#beat001">
+            Buy / Download Stems
+          </a>
+        </div>
+
+        <!-- BEAT 2 -->
+        <div class="beat">
+          <h3>Beat 002 – Green Light</h3>
+          <div class="meta">155 BPM · C♯ minor</div>
+
+          <audio controls>
+            <source src="audio/beat2-preview.mp3" type="audio/mpeg">
+          </audio>
+
+          <a class="btn free" href="audio/beat2-free.wav" download>
+            Download Free Beat (WAV)
+          </a>
+
+          <a class="btn stems" href="stems.html#beat002">
+            Buy / Download Stems
+          </a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" style="margin-top:32px">
+        <h2>Contact</h2>
+        <p>Email:
+          <a style="color:white;font-weight:700"
+             href="mailto:lilneighborcorp@gmail.com">
+            lilneighborcorp@gmail.com
+          </a>
+        </p>
+      </section>
+    </main>
+
+    <div class="right-rail"></div>
   </div>
 
+  <footer>
+    © <span id="year"></span> Lil' Neighbor C. LLC
+  </footer>
+
   <script>
-    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Merch dropdown toggle
-    const dropdown = document.getElementById("merchDropdown");
-    const button = dropdown.querySelector(".dropbtn");
-
-    button.addEventListener("click", (e) => {
-      // Allow normal click to Merch page if user clicks again? We'll toggle on click.
-      // Prevent immediate navigation if the user is trying to open the dropdown.
-      e.preventDefault();
-      dropdown.classList.toggle("open");
-      button.setAttribute("aria-expanded", dropdown.classList.contains("open") ? "true" : "false");
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove("open");
-        button.setAttribute("aria-expanded", "false");
-      }
-    });
   </script>
+
 </body>
 </html>
