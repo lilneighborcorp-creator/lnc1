@@ -24,6 +24,10 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
+  /* keeps dropdown above everything */
+  position:relative;
+  z-index:2000;
 }
 
 /* Brand area (logo + wordmark) */
@@ -60,6 +64,21 @@ nav{
   align-items:center;
 }
 
+/* Match your new navlink classes (works for dropdown + normal links) */
+.navlink{
+  color:var(--white);
+  text-decoration:none;
+  font-weight:700;
+  padding:8px 10px;
+  border-radius:6px;
+  display:inline-block;
+}
+
+.navlink:hover{
+  background:rgba(0,0,0,.25);
+}
+
+/* Keep old nav a styling too (harmless + backwards compatible) */
 nav a{
   color:var(--white);
   text-decoration:none;
@@ -70,6 +89,39 @@ nav a{
 
 nav a:hover{
   background:rgba(0,0,0,.25);
+}
+
+/* ===== Dropdown styles ===== */
+.dropdown{
+  position:relative;
+}
+
+.menu{
+  position:absolute;
+  top:42px;
+  right:0;
+  min-width:200px;
+  background: rgba(0,0,0,.85);
+  border-radius:10px;
+  padding:8px;
+  display:none;
+  z-index:3000;
+}
+
+.menu a{
+  display:block;
+  padding:10px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  color:var(--white);
+}
+
+.menu a:hover{
+  background: rgba(255,255,255,.12);
+}
+
+.dropdown.open .menu{
+  display:block;
 }
 
 /* ================= LAYOUT ================= */
@@ -182,14 +234,6 @@ audio{
   .layout{
     grid-template-columns: 16px minmax(0, 900px) 16px;
   }
-
-  /* Optional: hide pattern on mobile (uncomment if you want it cleaner) */
-  /*
-  .left-rail::before,
-  .right-rail::before{
-    display:none;
-  }
-  */
 
   .beat-row{
     flex-direction:column;
