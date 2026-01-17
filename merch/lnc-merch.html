@@ -1,7 +1,89 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LNC Merch</title></head><body style="margin:0;font-family:system-ui;background:#0b1020;color:#e5e7eb">
-<div style="max-width:900px;margin:0 auto;padding:24px">
-<h1>LNC Merch</h1>
-<p>Coming soon.</p>
-<p><a style="color:#e5e7eb" href="../index.html">← Home</a></p>
-</div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LNC Merch | Lil' Neighbor Corp.</title>
+
+  <!-- IMPORTANT: one level up -->
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <div class="brand">
+      <!-- IMPORTANT: one level up -->
+      <a href="../index.html" class="brand-link">
+        <img class="brand-logo" src="../images/lnc-header-logo.png" alt="Lil' Neighbor Corp logo">
+        <img class="brand-wordmark" src="../images/lil-neighbor-corp.png" alt="Lil' Neighbor Corp.®">
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <div class="dropdown" id="merchDropdown">
+        <!-- IMPORTANT: links are relative to /merch/ -->
+        <a class="navlink dropbtn" href="lnc-merch.html" aria-haspopup="true" aria-expanded="false">
+          Merch ▾
+        </a>
+
+        <div class="menu" role="menu" aria-label="Merch menu">
+          <a href="lnc-merch.html">LNC Merch</a>
+          <a href="lnc-workgear.html">LNC Workgear</a>
+          <a href="lnc-yorkshire.html">LNC Yorkshire</a>
+        </div>
+      </div>
+
+      <!-- IMPORTANT: one level up -->
+      <a class="navlink" href="../photography.html">Photography</a>
+      <a class="navlink" href="../about.html">About Us</a>
+      <a class="navlink" href="../index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <div class="left-rail"></div>
+
+    <main class="center">
+      <section class="hero">
+        <h1>LNC Merch</h1>
+        <p class="lead">Coming soon.</p>
+      </section>
+
+      <div class="beat">
+        Add merch content here later.
+      </div>
+    </main>
+
+    <div class="right-rail"></div>
+  </div>
+
+  <footer>
+    © <span id="year"></span> Lil' Neighbor C. LLC
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const dropdown = document.getElementById("merchDropdown");
+    if (dropdown) {
+      const button = dropdown.querySelector(".dropbtn");
+
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle("open");
+        button.setAttribute("aria-expanded", dropdown.classList.contains("open") ? "true" : "false");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("open");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
