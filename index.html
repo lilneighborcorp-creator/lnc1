@@ -4,9 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lil' Neighbor C. LLC</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
-  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -14,31 +13,33 @@
   <!-- HEADER -->
   <header>
     <div class="brand">
-  <a href="index.html" class="brand-link">
-    <img class="brand-logo" src="images/lnc-header-logo.png" alt="Lil' Neighbor Corp logo">
-    <img class="brand-wordmark" src="images/lil-neighbor-corp.png" alt="Lil' Neighbor Corp.®">
-  </a>
+      <a href="index.html" class="brand-link">
+        <img class="brand-logo" src="images/lnc-header-logo.png" alt="Lil' Neighbor Corp logo">
+        <img class="brand-wordmark" src="images/lil-neighbor-corp.png" alt="Lil' Neighbor Corp.®">
+      </a>
     </div>
 
-    
     <nav class="main-nav">
-  <div class="dropdown" id="merchDropdown">
-    <a class="navlink dropbtn" href="merch/lnc-merch.html" aria-haspopup="true" aria-expanded="false">
-      Merch ▾
-    </a>
+      <button class="nav-coin" id="coinControl" type="button" aria-label="Change coin animation speed">
+        <img src="images/new-lnc-coin.png" alt="">
+      </button>
 
-    <div class="menu" role="menu" aria-label="Merch menu">
-      <a href="merch/lnc-merch.html">LNC Merch</a>
-      <a href="merch/lnc-workgear.html">LNC Workgear</a>
-      <a href="merch/lnc-yorkshire.html">LNC Yorkshire</a>
-    </div>
-  </div>
+      <div class="dropdown" id="merchDropdown">
+        <a class="navlink dropbtn" href="merch/lnc-merch.html" aria-haspopup="true" aria-expanded="false">
+          Merch ▾
+        </a>
 
-  <a class="navlink" href="photography.html">Photography</a>
-  <a class="navlink" href="about.html">About Us</a>
-  <a class="navlink" href="#contact">Contact</a>
+        <div class="menu" role="menu" aria-label="Merch menu">
+          <a href="merch/lnc-merch.html">LNC Merch</a>
+          <a href="merch/lnc-workgear.html">LNC Workgear</a>
+          <a href="merch/lnc-yorkshire.html">LNC Yorkshire</a>
+        </div>
+      </div>
+
+      <a class="navlink" href="photography.html">Photography</a>
+      <a class="navlink" href="about.html">About Us</a>
+      <a class="navlink" href="#contact">Contact</a>
     </nav>
-
   </header>
 
   <!-- COLOR LAYOUT -->
@@ -59,32 +60,27 @@
         <!-- BEAT 1 -->
         <div class="beat">
           <div class="beat-row">
-            <img
-              src="images/yiannis.jpg"
-              alt="Cover art for same Neighbor"
-              class="cover"
-            >
-        
+            <img src="images/yiannis.jpg" alt="Cover art for same Neighbor" class="cover">
+
             <div class="beat-info">
               <h3>same Neighbor</h3>
               <div class="meta">115 BPM · A major</div>
-        
+
               <audio controls>
                 <source src="audio/track6-same-Neighbor.mp3" type="audio/mpeg">
               </audio>
-        
+
               <a class="btn free"
                  href="https://drive.google.com/file/d/18bN9lVHYinDA8fjHRQSv2IkufzTDzAD1/view?usp=sharing">
                 Download Free Beat (WAV)
               </a>
-        
+
               <a class="btn stems" href="stems.html#beat001">
                 Buy / Download Stems
               </a>
             </div>
           </div>
         </div>
-
 
         <!-- BEAT 2 -->
         <div class="beat">
@@ -109,8 +105,7 @@
       <section id="contact" style="margin-top:32px">
         <h2>Contact</h2>
         <p>Email:
-          <a style="color:white;font-weight:700"
-             href="mailto:lilneighborcorp@gmail.com">
+          <a style="color:white;font-weight:700" href="mailto:lilneighborcorp@gmail.com">
             lilneighborcorp@gmail.com
           </a>
         </p>
@@ -121,36 +116,86 @@
   </div>
 
   <footer>
-  © <span id="year"></span> Lil' Neighbor C. LLC
-</footer>
+    © <span id="year"></span> Lil' Neighbor C. LLC
+  </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
-<script>
-  const dropdown = document.getElementById("merchDropdown");
+  <!-- Dropdown JS -->
+  <script>
+    const dropdown = document.getElementById("merchDropdown");
 
-  if (dropdown) {
-    const button = dropdown.querySelector(".dropbtn");
+    if (dropdown) {
+      const button = dropdown.querySelector(".dropbtn");
 
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      dropdown.classList.toggle("open");
-      button.setAttribute(
-        "aria-expanded",
-        dropdown.classList.contains("open") ? "true" : "false"
-      );
-    });
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle("open");
+        button.setAttribute(
+          "aria-expanded",
+          dropdown.classList.contains("open") ? "true" : "false"
+        );
+      });
 
-    document.addEventListener("click", (e) => {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove("open");
-        button.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-</script>
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("open");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  </script>
+
+  <!-- Coin speed controller JS (cycle: slow -> stop -> fast -> normal) -->
+  <script>
+    const coinBtn = document.getElementById("coinControl");
+
+    // 0=normal, 1=slow, 2=stopped, 3=fast
+    let coinMode = 0;
+
+    // Add a CSS rule that pauses the ::before animation when a rail has .coin-paused
+    const pauseStyle = document.createElement("style");
+    pauseStyle.textContent = `
+      .coin-paused::before { animation-play-state: paused !important; }
+    `;
+    document.head.appendChild(pauseStyle);
+
+    function applyCoinMode() {
+      const rails = document.querySelectorAll(".left-rail, .right-rail");
+
+      rails.forEach((rail) => {
+        rail.classList.remove("coin-paused");
+
+        if (coinMode === 1) {
+          // slow
+          rail.style.setProperty("--coin-speed", "80s");
+        } else if (coinMode === 2) {
+          // stop
+          rail.classList.add("coin-paused");
+        } else if (coinMode === 3) {
+          // fast
+          rail.style.setProperty("--coin-speed", "20s");
+        } else {
+          // normal
+          rail.style.setProperty("--coin-speed", "40s");
+        }
+      });
+
+      const label = ["Normal speed", "Slow", "Stopped", "Fast"][coinMode];
+      if (coinBtn) coinBtn.setAttribute("title", `Coin pattern: ${label}`);
+    }
+
+    applyCoinMode();
+
+    if (coinBtn) {
+      coinBtn.addEventListener("click", () => {
+        coinMode = (coinMode + 1) % 4;
+        applyCoinMode();
+      });
+    }
+  </script>
 
 </body>
 </html>
