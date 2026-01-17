@@ -6,9 +6,7 @@
   --white:#ffffff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -25,9 +23,8 @@ header{
   align-items:center;
   justify-content:space-between;
 
-  /* keeps dropdown above everything */
   position:relative;
-  z-index:2000;
+  z-index:2000; /* keeps dropdown above everything */
 }
 
 /* Brand area (logo + wordmark) */
@@ -50,7 +47,7 @@ header{
   display:block;
 }
 
-/* Wordmark image (Academy Engraved LET as PNG) */
+/* Wordmark image (PNG) */
 .brand-wordmark{
   height:26px;      /* tweak 20–32px */
   width:auto;
@@ -58,13 +55,36 @@ header{
 }
 
 /* ================= NAVIGATION ================= */
-nav{
+.main-nav{
   display:flex;
   gap:16px;
   align-items:center;
 }
 
-/* Match your new navlink classes (works for dropdown + normal links) */
+/* solid coin button left of nav */
+.nav-coin{
+  appearance:none;
+  border:none;
+  background:transparent;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  cursor:pointer;
+}
+
+.nav-coin img{
+  height:32px;   /* solid header coin size */
+  width:auto;
+  display:block;
+}
+
+.nav-coin:focus-visible{
+  outline:3px solid rgba(255,255,255,.65);
+  outline-offset:4px;
+  border-radius:10px;
+}
+
+/* nav links */
 .navlink{
   color:var(--white);
   text-decoration:none;
@@ -75,19 +95,6 @@ nav{
 }
 
 .navlink:hover{
-  background:rgba(0,0,0,.25);
-}
-
-/* Keep old nav a styling too (harmless + backwards compatible) */
-nav a{
-  color:var(--white);
-  text-decoration:none;
-  font-weight:700;
-  padding:8px 10px;
-  border-radius:6px;
-}
-
-nav a:hover{
   background:rgba(0,0,0,.25);
 }
 
@@ -120,9 +127,7 @@ nav a:hover{
   background: rgba(255,255,255,.12);
 }
 
-.dropdown.open .menu{
-  display:block;
-}
+.dropdown.open .menu{ display:block; }
 
 /* ================= LAYOUT ================= */
 .layout{
@@ -139,7 +144,7 @@ nav a:hover{
   overflow: hidden;
 }
 
-/* Coin pattern layer */
+/* Coin pattern layer (animated) */
 .left-rail::before,
 .right-rail::before{
   content:"";
@@ -151,12 +156,36 @@ nav a:hover{
   transform: rotate(-25deg);    /* diagonal angle */
   opacity: 0.25;                /* coin visibility */
   pointer-events:none;
+  z-index:1;
+
+  will-change: background-position;
+  animation: coinDrift var(--coin-speed, 40s) linear infinite;
+}
+
+/* Left rail drift direction */
+@keyframes coinDrift{
+  from { background-position: 0 0; }
+  to   { background-position: 300px 300px; }
+}
+
+/* Right rail: opposite direction */
+.right-rail::before{
+  animation-name: coinDriftReverse;
+}
+
+@keyframes coinDriftReverse{
+  from { background-position: 0 0; }
+  to   { background-position: -300px -300px; }
 }
 
 .center{
   background:var(--blue);
   padding:32px;
 }
+
+/* (Optional) If you have hero/lead/beats classes, keep them simple */
+.hero{ margin-bottom:18px; }
+.lead{ max-width:70ch; }
 
 /* ================= BEATS ================= */
 .beat{
@@ -215,8 +244,14 @@ audio{
   background:#000;
 }
 
-.beat-info{
-  flex:1;
+.beat-info{ flex:1; }
+
+/* ================= ACCESSIBILITY: reduce motion ================= */
+@media (prefers-reduced-motion: reduce){
+  .left-rail::before,
+  .right-rail::before{
+    animation: none;
+  }
 }
 
 /* ================= MOBILE ================= */
@@ -227,17 +262,16 @@ audio{
     gap:10px;
   }
 
-  /* Slightly smaller brand on mobile */
   .brand-logo{ height:36px; }
   .brand-wordmark{ height:22px; }
+
+  .nav-coin img{ height:28px; }
 
   .layout{
     grid-template-columns: 16px minmax(0, 900px) 16px;
   }
 
-  .beat-row{
-    flex-direction:column;
-  }
+  .beat-row{ flex-direction:column; }
 
   .cover{
     width:100%;
