@@ -121,12 +121,36 @@
   </div>
 
   <footer>
-    © <span id="year"></span> Lil' Neighbor C. LLC
-  </footer>
+  © <span id="year"></span> Lil' Neighbor C. LLC
+</footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<script>
+  const dropdown = document.getElementById("merchDropdown");
+
+  if (dropdown) {
+    const button = dropdown.querySelector(".dropbtn");
+
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      dropdown.classList.toggle("open");
+      button.setAttribute(
+        "aria-expanded",
+        dropdown.classList.contains("open") ? "true" : "false"
+      );
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+        button.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
