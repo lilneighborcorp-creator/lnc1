@@ -99,9 +99,7 @@ header{
 }
 
 /* ===== Dropdown styles ===== */
-.dropdown{
-  position:relative;
-}
+.dropdown{ position:relative; }
 
 .menu{
   position:absolute;
@@ -144,7 +142,7 @@ header{
   overflow: hidden;
 }
 
-/* Coin pattern layer (animated) */
+/* Coin pattern layer (animated) - SAME direction on both rails */
 .left-rail::before,
 .right-rail::before{
   content:"";
@@ -159,23 +157,13 @@ header{
   z-index:1;
 
   will-change: background-position;
-  animation: coinDrift var(--coin-speed, 40s) linear infinite;
+  animation: coinDriftDown var(--coin-speed, 40s) linear infinite;
 }
 
-/* Left rail drift direction */
-@keyframes coinDrift{
+/* Downward diagonal drift (same for both rails) */
+@keyframes coinDriftDown{
   from { background-position: 0 0; }
   to   { background-position: 300px 300px; }
-}
-
-/* Right rail: opposite direction */
-.right-rail::before{
-  animation-name: coinDriftReverse;
-}
-
-@keyframes coinDriftReverse{
-  from { background-position: 0 0; }
-  to   { background-position: -300px -300px; }
 }
 
 .center{
@@ -183,7 +171,7 @@ header{
   padding:32px;
 }
 
-/* (Optional) If you have hero/lead/beats classes, keep them simple */
+/* (Optional) If you have hero/lead/beats classes */
 .hero{ margin-bottom:18px; }
 .lead{ max-width:70ch; }
 
