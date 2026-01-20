@@ -150,52 +150,47 @@
 
   <!-- Coin speed controller JS (cycle: slow -> stop -> fast -> normal) -->
   <script>
-    const coinBtn = document.getElementById("coinControl");
+  const coinBtn = document.getElementById("coinControl");
 
-    // 0=normal, 1=slow, 2=stopped, 3=fast
-    let coinMode = 0;
+  // 0=normal, 1=slow, 2=stopped, 3=fast
+  let coinMode = 0;
 
-    // Add a CSS rule that pauses the ::before animation when a rail has .coin-paused
-    const pauseStyle = document.createElement("style");
-    pauseStyle.textContent = `
-      .coin-paused::before { animation-play-state: paused !important; }
-    `;
-    document.head.appendChild(pauseStyle);
+  // Pause the ::before animation when rails have this class
+  const pauseStyle = document.createElement("style");
+  pauseStyle.textContent = `.coin-paused::before{ animation-play-state: paused !important; }`;
+  document.head.appendChild(pauseStyle);
 
-    function applyCoinMode() {
-      const rails = document.querySelectorAll(".left-rail, .right-rail");
+  function applyCoinMode() {
+    const rails = document.querySelectorAll(".left-rail, .right-rail");
 
-      rails.forEach((rail) => {
-        rail.classList.remove("coin-paused");
+    rails.forEach((rail) => {
+      rail.classList.remove("coin-paused");
 
-        if (coinMode === 1) {
-          // slow
-          rail.style.setProperty("--coin-speed", "80s");
-        } else if (coinMode === 2) {
-          // stop
-          rail.classList.add("coin-paused");
-        } else if (coinMode === 3) {
-          // fast
-          rail.style.setProperty("--coin-speed", "20s");
-        } else {
-          // normal
-          rail.style.setProperty("--coin-speed", "40s");
-        }
-      });
+      if (coinMode === 1) {
+        rail.style.setProperty("--coin-speed", "80s");   // slow
+      } else if (coinMode === 2) {
+        rail.classList.add("coin-paused");               // stop
+      } else if (coinMode === 3) {
+        rail.style.setProperty("--coin-speed", "20s");   // fast
+      } else {
+        rail.style.setProperty("--coin-speed", "40s");   // normal
+      }
+    });
 
-      const label = ["Normal speed", "Slow", "Stopped", "Fast"][coinMode];
-      if (coinBtn) coinBtn.setAttribute("title", `Coin pattern: ${label}`);
-    }
+    const label = ["Normal speed", "Slow", "Stopped", "Fast"][coinMode];
+    if (coinBtn) coinBtn.setAttribute("title", `Coin pattern: ${label}`);
+  }
 
-    applyCoinMode();
+  applyCoinMode();
 
-    if (coinBtn) {
-      coinBtn.addEventListener("click", () => {
-        coinMode = (coinMode + 1) % 4;
-        applyCoinMode();
-      });
-    }
-  </script>
+  if (coinBtn) {
+    coinBtn.addEventListener("click", () => {
+      coinMode = (coinMode + 1) % 4;
+      applyCoinMode();
+    });
+  }
+</script>
+
 
 </body>
 </html>
