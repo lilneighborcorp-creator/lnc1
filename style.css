@@ -252,7 +252,7 @@ header{
   min-height:calc(100vh - 72px);
 }
 
-/* Green rails */
+/* ================= GREEN RAILS + COIN PATTERN ================= */
 .left-rail,
 .right-rail{
   background-color: var(--green);
@@ -260,17 +260,26 @@ header{
   overflow: hidden;
 }
 
-/* Coin pattern layer (animated) - SAME direction on both rails */
+/* Coin pattern layer (animated, with intentional gaps) */
 .left-rail::before,
 .right-rail::before{
   content:"";
   position:absolute;
-  inset:-50%;
+
+  /* Make overlay huge so rotation never exposes green edges */
+  inset:-160%;
+
   background-image: url("images/new-lnc-coin.png");
   background-repeat: repeat;
-  background-size: 80px 80px;
+
+  /* Larger tile = visible gaps between coins */
+  background-size: 96px 96px;
+
+  /* Starting offset (keeps gaps consistent) */
+  background-position: 0 0;
+
   transform: rotate(-25deg);
-  opacity: 0.25;
+  opacity: 0.25;              /* subtle but visible */
   pointer-events:none;
   z-index:1;
 
@@ -278,10 +287,12 @@ header{
   animation: coinDriftDown var(--coin-speed, 40s) linear infinite;
 }
 
+/* Downward diagonal drift */
 @keyframes coinDriftDown{
   from { background-position: 0 0; }
-  to   { background-position: 300px 300px; }
+  to   { background-position: 360px 360px; }
 }
+
 
 .center{
   background:var(--blue);
