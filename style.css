@@ -89,7 +89,7 @@ header{
       #f7b500 24px
     );
   background-size: 200% 100%, auto;
-  animation: shineSweep 9s linear infinite;
+  animation: shineSweep 10s linear infinite;
   filter:saturate(1.1) contrast(1.05);
   pointer-events:none;
 }
@@ -152,7 +152,7 @@ header{
 /* Shine sweep animation */
 @keyframes shineSweep{
   0%   { background-position: -200% 0, 0 0; }
-  100% { background-position: 200% 0, 0 0; }
+  100% { background-position: 200% 0, 180px 180px; }
 }
 
 /* ================= NAVIGATION ================= */
