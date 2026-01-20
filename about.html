@@ -1,15 +1,123 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>About Us | Lil' Neighbor C. LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us | Lil' Neighbor Corp.</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 </head>
-<body style="margin:0;font-family:system-ui;background:#0b1020;color:#e5e7eb">
-  <div style="max-width:900px;margin:0 auto;padding:24px">
-    <h1>About Us</h1>
-    <p>Coming soon.</p>
-    <p><a style="color:#e5e7eb" href="index.html">← Back to Home</a></p>
+
+<body>
+
+  <header>
+    <div class="brand">
+      <a href="index.html" class="brand-link">
+        <img class="brand-logo" src="images/lnc-header-logo.png" alt="Lil' Neighbor Corp logo">
+        <img class="brand-wordmark" src="images/lil-neighbor-corp.png" alt="Lil' Neighbor Corp.®">
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <button class="nav-coin" id="coinControl" type="button" aria-label="Change coin animation speed">
+        <img src="images/new-lnc-coin.png" alt="">
+      </button>
+
+      <div class="dropdown" id="merchDropdown">
+        <a class="navlink dropbtn" href="merch/lnc-merch.html" aria-haspopup="true" aria-expanded="false">
+          Merch ▾
+        </a>
+        <div class="menu" role="menu" aria-label="Merch menu">
+          <a href="merch/lnc-merch.html">LNC Merch</a>
+          <a href="merch/lnc-workgear.html">LNC Workgear</a>
+          <a href="merch/lnc-yorkshire.html">LNC Yorkshire</a>
+        </div>
+      </div>
+
+      <a class="navlink" href="photography.html">Photography</a>
+      <a class="navlink" href="about.html">About Us</a>
+      <a class="navlink" href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <div class="left-rail"></div>
+
+    <main class="center">
+      <section class="hero">
+        <h1>About Us</h1>
+        <p class="lead">Lil’ Neighbor Corp.® — beats, merch, and more.</p>
+      </section>
+
+      <div class="beat">
+        Put your story/mission here.
+      </div>
+    </main>
+
+    <div class="right-rail"></div>
   </div>
+
+  <footer>
+    © <span id="year"></span> Lil' Neighbor C. LLC
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- Dropdown -->
+  <script>
+    const dropdown = document.getElementById("merchDropdown");
+    if (dropdown) {
+      const button = dropdown.querySelector(".dropbtn");
+
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle("open");
+        button.setAttribute("aria-expanded", dropdown.classList.contains("open") ? "true" : "false");
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("open");
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  </script>
+
+  <!-- Coin speed controller -->
+  <script>
+    const coinBtn = document.getElementById("coinControl");
+    let coinMode = 0;
+
+    const pauseStyle = document.createElement("style");
+    pauseStyle.textContent = `.coin-paused::before{ animation-play-state: paused !important; }`;
+    document.head.appendChild(pauseStyle);
+
+    function applyCoinMode() {
+      const rails = document.querySelectorAll(".left-rail, .right-rail");
+
+      rails.forEach((rail) => {
+        rail.classList.remove("coin-paused");
+
+        if (coinMode === 1) rail.style.setProperty("--coin-speed", "80s");
+        else if (coinMode === 2) rail.classList.add("coin-paused");
+        else if (coinMode === 3) rail.style.setProperty("--coin-speed", "20s");
+        else rail.style.setProperty("--coin-speed", "40s");
+      });
+    }
+
+    applyCoinMode();
+
+    if (coinBtn) {
+      coinBtn.addEventListener("click", () => {
+        coinMode = (coinMode + 1) % 4;
+        applyCoinMode();
+      });
+    }
+  </script>
+
 </body>
 </html>
