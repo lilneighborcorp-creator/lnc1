@@ -15,6 +15,12 @@ body{
   color: var(--white);
 }
 
+/* Prevent any random image from blowing up the page */
+img{
+  max-width:100%;
+  height:auto;
+}
+
 /* ================= HEADER ================= */
 header{
   background: var(--red);
@@ -40,121 +46,16 @@ header{
   text-decoration:none;
 }
 
-/* Main logo image */
 .brand-logo{
   height:40px;      /* tweak 32–48px */
   width:auto;
   display:block;
 }
 
-/* Wordmark image (PNG) */
 .brand-wordmark{
   height:26px;      /* tweak 20–32px */
   width:auto;
   display:block;
-}
-/* ================= RETRO ANNOUNCEMENT MARQUEE ================= */
-.announcement{
-  position:relative;
-  overflow:hidden;
-  border-top:4px solid rgba(255,255,255,.25);
-  border-bottom:4px solid rgba(0,0,0,.35);
-  z-index:1500; /* safely under dropdown (header z-index is higher) */
-
-  /* Beveled edges for retro metallic feel */
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.55),
-    inset 0 3px 0 rgba(255,255,255,0.15),
-    inset 0 -2px 0 rgba(0,0,0,0.35),
-    inset 0 -4px 0 rgba(0,0,0,0.6);
-}
-
-/* Sonic-esque shiny gold bars */
-.announcement::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    /* moving shine sweep */
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.0) 0%,
-      rgba(255,255,255,0.35) 18%,
-      rgba(255,255,255,0.0) 36%
-    ),
-    /* Sonic-esque diagonal stripes */
-    repeating-linear-gradient(
-      -20deg,
-      #ffd84a 0px,
-      #ffd84a 12px,
-      #f7b500 12px,
-      #f7b500 24px
-    );
-  background-size: 200% 100%, auto;
-  animation: shineSweep 10s linear infinite;
-  filter:saturate(1.1) contrast(1.05);
-  pointer-events:none;
-}
-
-/* Darken slightly so white text stays readable */
-.announcement::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,0.18);
-  pointer-events:none;
-}
-
-.announcement-inner{
-  position:relative;
-  padding:10px 0;
-}
-
-.announcement-track{
-  display:inline-flex;
-  gap:48px;
-  white-space:nowrap;
-  will-change:transform;
-  animation: marqueeLeft 14s linear infinite;
-  padding-left:100%;
-}
-
-.announcement-track span{
-  font-style:italic;
-  font-weight:900;
-  letter-spacing:0.6px;
-  color:#ffffff;
-  text-shadow:
-    0 2px 0 rgba(0,0,0,0.55),
-    0 0 10px rgba(0,0,0,0.25);
-  font-family: "Baloo 2", system-ui, sans-serif; /* retro-friendly */
-  font-size:16px;
-}
-
-/* Marquee animation */
-@keyframes marqueeLeft{
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-66.666%); }
-}
-
-/* Optional: slightly faster on wide screens */
-@media (min-width:900px){
-  .announcement-track{
-    animation-duration: 12s;
-  }
-}
-
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce){
-  .announcement-track{
-    animation:none;
-    padding-left:0;
-  }
-}
-/* Shine sweep animation */
-@keyframes shineSweep{
-  0%   { background-position: -200% 0, 0 0; }
-  100% { background-position: 200% 0, 180px 180px; }
 }
 
 /* ================= NAVIGATION ================= */
@@ -176,7 +77,7 @@ header{
 }
 
 .nav-coin img{
-  height:32px;   /* solid header coin size */
+  height:32px;
   width:auto;
   display:block;
 }
@@ -201,7 +102,7 @@ header{
   background:rgba(0,0,0,.25);
 }
 
-/* ===== Dropdown styles ===== */
+/* Dropdown */
 .dropdown{ position:relative; }
 
 .menu{
@@ -214,6 +115,7 @@ header{
   padding:8px;
   display:none;
   z-index:3000;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
 .menu a{
@@ -230,6 +132,119 @@ header{
 
 .dropdown.open .menu{ display:block; }
 
+/* ================= RETRO ANNOUNCEMENT MARQUEE ================= */
+.announcement{
+  position:relative;
+  overflow:hidden;
+  border-top:4px solid rgba(255,255,255,.25);
+  border-bottom:4px solid rgba(0,0,0,.35);
+  z-index:1500;
+
+  /* Beveled edges */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.55),
+    inset 0 3px 0 rgba(255,255,255,0.15),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    inset 0 -4px 0 rgba(0,0,0,0.6);
+}
+
+/* Stripes layer (barbershop pole) */
+.announcement::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      -20deg,
+      #ffd84a 0px,
+      #ffd84a 12px,
+      #f7b500 12px,
+      #f7b500 24px
+    );
+  animation: stripeRoll 12s linear infinite;
+  pointer-events:none;
+}
+
+/* Shine layer (separate so it doesn't look “swimmy”) */
+.announcement::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.0) 0%,
+      rgba(255,255,255,0.35) 18%,
+      rgba(255,255,255,0.0) 36%
+    );
+  background-size: 200% 100%;
+  animation: shineSweep 7s linear infinite;
+  pointer-events:none;
+  opacity:0.85;
+}
+
+/* Darken slightly so text reads well */
+.announcement-inner{
+  position:relative;
+  padding:10px 0;
+}
+
+.announcement-inner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.18);
+  pointer-events:none;
+}
+
+.announcement-track{
+  position:relative;
+  z-index:2;
+  display:inline-flex;
+  gap:48px;
+  white-space:nowrap;
+  will-change:transform;
+  animation: marqueeLeft 14s linear infinite;
+  padding-left:100%;
+}
+
+.announcement-track span{
+  font-style:italic;
+  font-weight:900;
+  letter-spacing:0.6px;
+  color:#ffffff;
+  text-shadow:
+    0 2px 0 rgba(0,0,0,0.55),
+    0 0 10px rgba(0,0,0,0.25);
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size:16px;
+}
+
+@keyframes marqueeLeft{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-66.666%); }
+}
+
+@keyframes stripeRoll{
+  from { background-position: 0 0; }
+  to   { background-position: 240px 240px; }
+}
+
+@keyframes shineSweep{
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@media (min-width:900px){
+  .announcement-track{ animation-duration: 12s; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .announcement-track{ animation:none; padding-left:0; }
+  .announcement::before,
+  .announcement::after{ animation:none; }
+}
+
 /* ================= LAYOUT ================= */
 .layout{
   display:grid;
@@ -237,7 +252,7 @@ header{
   min-height:calc(100vh - 72px);
 }
 
-/* Green rails with diagonal repeating coin overlay */
+/* Green rails */
 .left-rail,
 .right-rail{
   background-color: var(--green);
@@ -253,9 +268,9 @@ header{
   inset:-50%;
   background-image: url("images/new-lnc-coin.png");
   background-repeat: repeat;
-  background-size: 80px 80px;   /* coin size */
-  transform: rotate(-25deg);    /* diagonal angle */
-  opacity: 0.25;                /* coin visibility */
+  background-size: 80px 80px;
+  transform: rotate(-25deg);
+  opacity: 0.25;
   pointer-events:none;
   z-index:1;
 
@@ -263,7 +278,6 @@ header{
   animation: coinDriftDown var(--coin-speed, 40s) linear infinite;
 }
 
-/* Downward diagonal drift (same for both rails) */
 @keyframes coinDriftDown{
   from { background-position: 0 0; }
   to   { background-position: 300px 300px; }
@@ -274,36 +288,40 @@ header{
   padding:32px;
 }
 
-/* ================= GALLERY ================= */
-.gallery{
-  margin-bottom:18px;
+/* ================= HERO / TEXT ================= */
+.hero{ margin-bottom:18px; }
+
+.lead{
+  max-width:70ch;
+  line-height:1.5;
 }
+
+/* ================= GALLERY ================= */
+.gallery{ margin-bottom:18px; }
 
 .gallery-frame{
   position:relative;
   width:100%;
-  height:280px;                 /* adjust height here */
+  height:280px;
   border-radius:16px;
   overflow:hidden;
   background: rgba(0,0,0,.45);
   box-shadow: inset 0 0 0 2px rgba(255,255,255,.12);
 }
 
-/* Images (supports different sizes/formats safely) */
+/* This forces images to stay inside the fixed gallery frame */
 .gallery-img{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  object-fit:cover;            /* crops to fill (no distortion) */
-  object-position:center;      /* change to 'center 20%' if needed */
+  object-fit:cover;
+  object-position:center;
   opacity:0;
   transition: opacity 900ms ease;
 }
 
-.gallery-img.active{
-  opacity:1;
-}
+.gallery-img.active{ opacity:1; }
 
 /* Overlay controls */
 .gallery-controls{
@@ -338,7 +356,6 @@ header{
   height:1px;
 }
 
-/* Track + knob */
 .toggle-track{
   width:46px;
   height:24px;
@@ -360,7 +377,6 @@ header{
   transition: transform 180ms ease;
 }
 
-/* Checked = paused look */
 .gallery-toggle input:checked + .toggle-track{
   background: rgba(255,255,255,.28);
 }
@@ -369,25 +385,12 @@ header{
   transform: translateX(22px);
 }
 
-/* Label */
-.toggle-label{
-  letter-spacing:.2px;
-}
+.toggle-label{ letter-spacing:.2px; }
 
-/* Keyboard focus */
 .gallery-toggle:focus-within{
   outline:3px solid rgba(255,255,255,.55);
   outline-offset:3px;
 }
-
-/* Mobile height tweak */
-@media (max-width:600px){
-  .gallery-frame{ height:240px; }
-}
-
-/* (Optional) If you have hero/lead/beats classes */
-.hero{ margin-bottom:18px; }
-.lead{ max-width:70ch; }
 
 /* ================= BEATS ================= */
 .beat{
@@ -408,7 +411,6 @@ audio{
   margin-bottom:10px;
 }
 
-/* Buttons */
 .btn{
   display:block;
   width:100%;
@@ -430,7 +432,7 @@ audio{
   color:var(--white);
 }
 
-/* ================= COVER ART ================= */
+/* Cover art inside beat cards */
 .beat-row{
   display:flex;
   gap:16px;
@@ -448,14 +450,6 @@ audio{
 
 .beat-info{ flex:1; }
 
-/* ================= ACCESSIBILITY: reduce motion ================= */
-@media (prefers-reduced-motion: reduce){
-  .left-rail::before,
-  .right-rail::before{
-    animation: none;
-  }
-}
-
 /* ================= MOBILE ================= */
 @media (max-width:600px){
   header{
@@ -472,6 +466,8 @@ audio{
   .layout{
     grid-template-columns: 16px minmax(0, 900px) 16px;
   }
+
+  .gallery-frame{ height:240px; }
 
   .beat-row{ flex-direction:column; }
 
