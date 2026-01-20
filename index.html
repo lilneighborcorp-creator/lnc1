@@ -63,6 +63,14 @@
     <img class="gallery-img" src="images/test-image1.jpg" alt="Gallery image 2">
     <img class="gallery-img" src="images/test-image2.jpg" alt="Gallery image 3">
 
+<button class="gallery-arrow left" id="galleryPrev" type="button" aria-label="Previous image">
+  ‹
+</button>
+
+<button class="gallery-arrow right" id="galleryNext" type="button" aria-label="Next image">
+  ›
+</button>
+    
     <!-- Pause toggle overlay -->
     <div class="gallery-controls">
       <label class="gallery-toggle" title="Pause gallery">
@@ -221,22 +229,23 @@
 <script>
   const slides = Array.from(document.querySelectorAll(".gallery-img"));
   const pauseToggle = document.getElementById("galleryPause");
+  const prevBtn = document.getElementById("galleryPrev");
+  const nextBtn = document.getElementById("galleryNext");
 
   let idx = 0;
   let timer = null;
 
   function showSlide(nextIdx){
     slides[idx].classList.remove("active");
-    idx = nextIdx;
+    idx = (nextIdx + slides.length) % slides.length; // safe wrap
     slides[idx].classList.add("active");
   }
 
   function startGallery(){
     if (timer || slides.length <= 1) return;
     timer = setInterval(() => {
-      const next = (idx + 1) % slides.length;
-      showSlide(next);
-    }, 8000); // 8 seconds
+      showSlide(idx + 1);
+    }, 8000);
   }
 
   function stopGallery(){
@@ -248,11 +257,26 @@
   // Start on load
   startGallery();
 
-  // Toggle pause/resume
+  // Pause toggle
   if (pauseToggle) {
     pauseToggle.addEventListener("change", () => {
       if (pauseToggle.checked) stopGallery();
       else startGallery();
+    });
+  }
+
+  // Arrows
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      showSlide(idx - 1);
+      if (!pauseToggle?.checked) { stopGallery(); startGallery(); } // reset timer
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      showSlide(idx + 1);
+      if (!pauseToggle?.checked) { stopGallery(); startGallery(); } // reset timer
     });
   }
 </script>
