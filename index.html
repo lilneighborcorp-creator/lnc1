@@ -218,6 +218,44 @@
     });
   }
 </script>
+<script>
+  const slides = Array.from(document.querySelectorAll(".gallery-img"));
+  const pauseToggle = document.getElementById("galleryPause");
+
+  let idx = 0;
+  let timer = null;
+
+  function showSlide(nextIdx){
+    slides[idx].classList.remove("active");
+    idx = nextIdx;
+    slides[idx].classList.add("active");
+  }
+
+  function startGallery(){
+    if (timer || slides.length <= 1) return;
+    timer = setInterval(() => {
+      const next = (idx + 1) % slides.length;
+      showSlide(next);
+    }, 8000); // 8 seconds
+  }
+
+  function stopGallery(){
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  // Start on load
+  startGallery();
+
+  // Toggle pause/resume
+  if (pauseToggle) {
+    pauseToggle.addEventListener("change", () => {
+      if (pauseToggle.checked) stopGallery();
+      else startGallery();
+    });
+  }
+</script>
 
 
 </body>
