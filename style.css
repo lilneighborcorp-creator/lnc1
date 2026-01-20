@@ -313,11 +313,16 @@ header{
 .gallery-frame{
   position:relative;
   width:100%;
-  height:280px;
+  aspect-ratio: 16 / 9;   /* 1920x1080 ratio */
+  max-height: 420px;      /* prevents it from getting TOO tall */
   border-radius:16px;
   overflow:hidden;
   background: rgba(0,0,0,.45);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.12);
+  border: 2px solid rgba(120, 200, 255, 0.55);
+  box-shadow:
+    0 0 0 2px rgba(120, 200, 255, 0.15),
+    0 0 18px rgba(120, 200, 255, 0.35),
+    inset 0 0 0 2px rgba(255,255,255,.08);
 }
 
 /* This forces images to stay inside the fixed gallery frame */
