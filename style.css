@@ -198,13 +198,11 @@ header{
 }
 
 .announcement-track{
-  position:relative;
-  z-index:2;
   display:inline-flex;
   gap:48px;
   white-space:nowrap;
   will-change:transform;
-  animation: marqueeLeft 14s linear infinite;
+  animation: marqueeCycle 18s linear infinite;
   padding-left:100%;
 }
 
@@ -220,9 +218,20 @@ header{
   font-size:16px;
 }
 
-@keyframes marqueeLeft{
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-66.666%); }
+@keyframes marqueeCycle{
+  0%{
+    transform: translateX(0);
+  }
+
+  /* Message fully travels across */
+  70%{
+    transform: translateX(-120%);
+  }
+
+  /* Pause while off-screen */
+  100%{
+    transform: translateX(-120%);
+  }
 }
 
 @keyframes stripeRoll{
