@@ -153,15 +153,15 @@ header{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    repeating-linear-gradient(
-      -20deg,
-      #ffd84a 0px,
-      #ffd84a 12px,
-      #f7b500 12px,
-      #f7b500 24px
-    );
-  animation: stripeRoll 12s linear infinite;
+
+  background: linear-gradient(
+    180deg,
+    #ffd84a 0%,
+    #f7b500 50%,
+    #ffd84a 100%
+  );
+
+  animation: goldSwap 1.3s steps(1) infinite;
   pointer-events:none;
 }
 
@@ -234,14 +234,33 @@ header{
   }
 }
 
-@keyframes stripeRoll{
-  from { background-position: 0 0; }
-  to   { background-position: 240px 240px; }
-}
+@keyframes goldSwap{
+  0%{
+    background: linear-gradient(
+      180deg,
+      #ffd84a 0%,
+      #f7b500 50%,
+      #ffd84a 100%
+    );
+  }
 
-@keyframes shineSweep{
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  50%{
+    background: linear-gradient(
+      180deg,
+      #f7b500 0%,
+      #ffd84a 50%,
+      #f7b500 100%
+    );
+  }
+
+  100%{
+    background: linear-gradient(
+      180deg,
+      #ffd84a 0%,
+      #f7b500 50%,
+      #ffd84a 100%
+    );
+  }
 }
 
 @media (min-width:900px){
